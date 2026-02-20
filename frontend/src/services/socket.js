@@ -1,6 +1,7 @@
 import { io } from 'socket.io-client';
 
 const SOCKET_URL = process.env.SOCKET_URL || 'http://localhost:5000';
+console.log('Socket URL:', SOCKET_URL);
 
 let socket = null;
 
