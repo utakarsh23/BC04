@@ -53,18 +53,18 @@ function ExpertDetail() {
 
   const updateSlotStatus = (date, timeSlot, isBooked) => {
     setExpert((prevExpert) => {
-      if (!prevExpert) return prevExpert;
+      if (!prevExpert || !Array.isArray(prevExpert.availability)) return prevExpert;
       
       const updatedAvailability = prevExpert.availability.map((dateSlot) => {
         if (dateSlot.date === date) {
           return {
             ...dateSlot,
-            slots: dateSlot.slots.map((slot) => {
+            slots: Array.isArray(dateSlot.slots) ? dateSlot.slots.map((slot) => {
               if (slot.time === timeSlot) {
                 return { ...slot, isBooked };
               }
               return slot;
-            })
+            }) : []
           };
         }
         return dateSlot;

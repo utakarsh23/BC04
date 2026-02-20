@@ -6,7 +6,7 @@ function BookingModal({ expert, onClose, onBookingSelect }) {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedSlot, setSelectedSlot] = useState('');
 
-  const availableDates = expert.availability || [];
+  const availableDates = Array.isArray(expert?.availability) ? expert.availability : [];
   
   const getDayName = (dateString) => {
     const date = new Date(dateString);
@@ -30,7 +30,9 @@ function BookingModal({ expert, onClose, onBookingSelect }) {
     }
   };
 
-  const selectedDateSlots = availableDates.find(d => d.date === selectedDate)?.slots || [];
+  const selectedDateSlots = Array.isArray(
+    availableDates.find(d => d.date === selectedDate)?.slots
+  ) ? availableDates.find(d => d.date === selectedDate).slots : [];
 
   return (
     <div 

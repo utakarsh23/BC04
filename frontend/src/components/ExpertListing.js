@@ -118,7 +118,7 @@ function ExpertListing() {
               }`}
             >
               <option value="">All Categories</option>
-              {categories.map((cat) => (
+              {Array.isArray(categories) && categories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
                 </option>
@@ -135,7 +135,7 @@ function ExpertListing() {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {experts.map((expert) => (
+            {Array.isArray(experts) && experts.map((expert) => (
               <div
                 key={expert._id}
                 onClick={() => handleExpertClick(expert._id)}
