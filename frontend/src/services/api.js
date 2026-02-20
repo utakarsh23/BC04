@@ -1,8 +1,10 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const API_URL = process.env.BACKEND_URL || 'http://localhost:9066/api';
 
-console.log('API URL:', API_URL);
 const api = axios.create({
   baseURL: API_URL,
   headers: {
