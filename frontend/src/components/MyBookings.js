@@ -57,7 +57,7 @@ function MyBookings() {
     try {
       // Get bookings from API
       const response = await bookingAPI.getBookings({ email: emailToSearch });
-      const apiBookings = response.data;
+      const apiBookings = Array.isArray(response?.data) ? response.data : [];
 
       // Get bookings from localStorage
       const localBookings = JSON.parse(localStorage.getItem('myBookings') || '[]')

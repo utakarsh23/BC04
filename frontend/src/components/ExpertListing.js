@@ -23,9 +23,12 @@ function ExpertListing() {
   const fetchCategories = async () => {
     try {
       const response = await expertAPI.getCategories();
-      setCategories(response.data);
+      if (response?.data && Array.isArray(response.data)) {
+        setCategories(response.data);
+      }
     } catch (err) {
       console.error('Failed to fetch categories:', err);
+      setCategories([]);
     }
   };
 
@@ -39,11 +42,19 @@ function ExpertListing() {
         search,
         category
       });
-      setExperts(response.data.experts);
-      setTotalPages(response.data.totalPages);
+      
+      if (response?.data?.experts) {
+        setExperts(response.data.experts);
+        setTotalPages(response.data.totalPages || 1);
+      } else {
+        setExperts([]);
+        setTotalPages(1);
+      }
       setLoading(false);
     } catch (err) {
+      console.error('API Error:', err);
       setError('Failed to load experts. Please try again.');
+      setExperts([]);
       setLoading(false);
     }
   };

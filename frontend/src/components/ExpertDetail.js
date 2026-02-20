@@ -20,9 +20,15 @@ function ExpertDetail() {
     setError(null);
     try {
       const response = await expertAPI.getExpertById(id);
-      setExpert(response.data);
+      
+      if (response?.data) {
+        setExpert(response.data);
+      } else {
+        setError('Expert not found');
+      }
       setLoading(false);
     } catch (err) {
+      console.error('API Error:', err);
       setError('Failed to load expert details. Please try again.');
       setLoading(false);
     }
